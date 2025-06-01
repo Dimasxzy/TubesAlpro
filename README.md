@@ -50,9 +50,15 @@ Sesuai dengan aturan, variabel global dibatasi hanya untuk array dan tipe bentuk
 ________________________________________
 ✅ Kesimpulan
 Program ini sudah sesuai dengan seluruh ketentuan yang diberikan:
+
 •	Modular
+
 •	Menggunakan array statis dan struct
+
 •	Memiliki fitur CRUD
+
 •	Pencarian & pengurutan sesuai algoritma dasar
+
 •	Ada proses perhitungan biaya
+
 •	Tidak melanggar batasan penggunaan variabel global dan struktur kontrol

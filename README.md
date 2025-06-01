@@ -1,5 +1,5 @@
 Presentasi Program Penggunaan Komputer Warnet (Bahasa Go)
-📌 1. Modularitas (Menggunakan Prosedur dan Fungsi)
+1. Modularitas (Menggunakan Prosedur dan Fungsi)
 Program ini disusun secara modular dengan membagi setiap fitur ke dalam fungsi-fungsi terpisah seperti:
 •	tampilkanMenu() | untuk menampilkan menu utama.
 •	tambahData() | untuk memasukkan data baru.

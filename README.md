@@ -47,6 +47,7 @@ Struktur data untuk menyimpan satu entri penggunaan komputer:
 •	Biaya: Total biaya penggunaan
 ________________________________________
 3. Konstanta & Variabel Global
+
 const (
     tarifPerJam = 15000
     maxData     = 100

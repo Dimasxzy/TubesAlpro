@@ -53,6 +53,12 @@ func main() {
         case 9:
             fmt.Println("👋 Terima kasih, program selesai.")
             return
+        case 10:
+            laporanHarian()
+        case 11:
+            rataRataDurasi()
+        case 12:
+            daftarKomputerAktif()
         default:
             fmt.Println("❗ Pilihan tidak tersedia. Silakan coba lagi.\n")
         }
@@ -72,6 +78,9 @@ func tampilkanMenu() {
     fmt.Println("║ 7. 📉 Urutkan Biaya (Turun)            ║")
     fmt.Println("║ 8. 🔄 Reset Data                       ║")
     fmt.Println("║ 9. ❌ Keluar Program                   ║")
+    fmt.Println("║10. 🧾 Laporan Harian                   ║")
+    fmt.Println("║11. 📊 Rata-rata Durasi Penggunaan      ║")
+    fmt.Println("║12. 🖥️  Daftar Komputer yang Digunakan  ║")
     fmt.Println("╚════════════════════════════════════════╝")
     fmt.Print("Pilih menu: ")
 }
@@ -111,7 +120,6 @@ func tambahData(format string) {
 
     durasi := tSelesai.Sub(tMulai)
     jam := durasi.Hours()
-
     biaya := int(jam * tarifPerJam)
     if biaya == 0 {
         biaya = tarifPerJam
@@ -213,4 +221,54 @@ func urutkanDataBiaya(naik bool) {
 func resetData() {
     jumlahData = 0
     fmt.Println("🔁 Semua data telah direset.\n")
+}
+
+func laporanHarian() {
+    if jumlahData == 0 {
+        fmt.Println("📂 Belum ada data hari ini.\n")
+        return
+    }
+
+    total := 0
+    for i := 0; i < jumlahData; i++ {
+        total += data[i].Biaya
+    }
+
+    fmt.Println("📊 === Laporan Harian ===")
+    fmt.Printf("Total Pengguna: %d\n", jumlahData)
+    fmt.Printf("Total Pendapatan: Rp%d\n", total)
+}
+
+func rataRataDurasi() {
+    if jumlahData == 0 {
+        fmt.Println("📂 Tidak ada data untuk dihitung.")
+        return
+    }
+
+    totalDurasi := time.Duration(0)
+    for i := 0; i < jumlahData; i++ {
+        d, _ := time.ParseDuration(data[i].Durasi)
+        totalDurasi += d
+    }
+
+    rata2 := totalDurasi / time.Duration(jumlahData)
+    fmt.Printf("⏱️ Rata-rata durasi penggunaan: %s\n", rata2)
+}
+
+func daftarKomputerAktif() {
+    if jumlahData == 0 {
+        fmt.Println("📂 Belum ada penggunaan komputer.")
+        return
+    }
+
+    digunakan := make(map[int]bool)
+    for i := 0; i < jumlahData; i++ {
+        digunakan[data[i].Komputer] = true
+    }
+
+    fmt.Print("🖥️ Komputer yang digunakan: ")
+    for k := range digunakan {
+        fmt.Printf("PC #%d ", k)
+    }
+    fmt.Println()
 }

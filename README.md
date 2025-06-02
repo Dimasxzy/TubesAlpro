@@ -1,83 +1,148 @@
-Presentasi Program Penggunaan Komputer Warnet (Bahasa Go)
+🧠 Tujuan Program
+Program ini digunakan untuk mencatat, mengelola, dan menganalisis penggunaan komputer warnet atau laboratorium dengan berbagai fitur seperti:
 
-📌 1. Modularitas (Menggunakan Prosedur dan Fungsi)
-Program ini disusun secara modular dengan membagi setiap fitur ke dalam fungsi-fungsi terpisah seperti:
+•	Menambah, mengedit, menghapus, dan mencari data pengguna
 
-•	tampilkanMenu() | untuk menampilkan menu utama.
+•	Menghitung durasi dan biaya penggunaan
 
-•	tambahData() | untuk memasukkan data baru.
-
-•	tampilkanData() | untuk melihat seluruh data.
-
-•	updateData() | untuk mengedit data.
-
-•	hapusData() | untuk menghapus data.
-
-•	cariData() | untuk pencarian data.
-
-•	urutkanDataBiaya() | untuk mengurutkan data berdasarkan biaya.
-
-•	resetData() | untuk menghapus semua data.
+•	Menyediakan laporan harian, rata-rata durasi, dan komputer aktif
 ________________________________________
-📌 2. Array Statis dan Tipe Bentukan
-Program menggunakan:
+📦 Struktur Program
+1. Import Package
+import (
+    "fmt"
+    "time"
+)
 
-•	Array statis: var data [maxData]Penggunaan untuk menyimpan data dengan kapasitas maksimum 100.
+•	fmt: Untuk input/output (misal: fmt.Println, fmt.Scanln)
 
-•	Tipe bentukan: type Penggunaan struct { ... } untuk merepresentasikan satu entri penggunaan komputer.
+•	time: Untuk manipulasi waktu (time.Parse, time.Duration, dll.)
 ________________________________________
-📌 3. Fitur CRUD Lengkap
-Program mendukung fitur:
+2. Struct Penggunaan
+type Penggunaan struct {
+    Nama     string
+    Komputer int
+    Mulai    string
+    Selesai  string
+    Durasi   string
+    Biaya    int
+}
+Struktur data untuk menyimpan satu entri penggunaan komputer:
 
-•	Create: dengan fungsi tambahData().
+•	Nama: Nama pengguna
 
-•	Read: dengan fungsi tampilkanData().
+•	Komputer: Nomor komputer
 
-•	Update: dengan fungsi updateData(), memungkinkan pengguna mengedit nama dan nomor komputer.
+•	Mulai, Selesai: Jam mulai dan selesai (dalam format string)
 
-•	Delete: dengan fungsi hapusData(), menghapus data berdasarkan nama pengguna.
+•	Durasi: Lama pemakaian (string hasil dari Duration.String())
+
+•	Biaya: Total biaya penggunaan
 ________________________________________
-📌 4. Pencarian dengan Sequential Search
-Pencarian dilakukan menggunakan sequential search dalam fungsi cariIndex(nama string), yang digunakan juga oleh updateData(), hapusData(), dan cariData().
+3. Konstanta & Variabel Global
+const (
+    tarifPerJam = 15000
+    maxData     = 100
+)
+var (
+    data       [maxData]Penggunaan
+    jumlahData int
+)
+
+•	tarifPerJam: Biaya per jam komputer
+
+•	data: Array berukuran maksimal 100 untuk menyimpan data penggunaan
+
+•	jumlahData: Jumlah data yang sedang tersimpan
 ________________________________________
-📌 5. Pengurutan dengan Selection Sort
-Pengurutan data berdasarkan biaya penggunaan komputer menggunakan algoritma selection sort:
+4. Fungsi main
+Fungsi utama program:
 
-•	urutkanDataBiaya(true) untuk pengurutan menaik.
+•	Menampilkan menu secara berulang
 
-•	urutkanDataBiaya(false) untuk pengurutan menurun.
+•	Menangani pilihan menu dari user menggunakan switch
 ________________________________________
-📌 6. Perhitungan Sederhana
-Program menghitung durasi penggunaan komputer dan biaya yang harus dibayar berdasarkan durasi dengan tarif Rp15.000 per jam:
-biaya := int(jam * tarifPerJam)
-Jika waktu penggunaan kurang dari 1 jam, tetap dikenakan biaya minimum 1 jam.
+🧭 Fungsi-Fungsi Menu
+✅ tampilkanMenu()
+Menampilkan daftar menu pilihan.
 ________________________________________
-📌 7. Fitur Opsional: Akun/Registrasi
-Fitur akun tidak diterapkan karena sifat program hanya fokus pada pencatatan penggunaan komputer harian secara langsung.
+✅ tambahData(format string)
+
+•	Meminta input nama, nomor komputer, waktu mulai dan selesai
+
+•	Menghitung durasi dan biaya berdasarkan tarif
+
+•	Menyimpan data ke array data
+
+Catatan: Jika waktu selesai < mulai, dianggap lewat tengah malam (+24 jam).
 ________________________________________
-📌 8. Penggunaan Break/Continue
-Program tidak menggunakan break atau continue secara langsung, dan hanya menggunakan struktur kontrol standar seperti if, for, dan switch.
+✅ tampilkanData()
+Menampilkan semua data penggunaan komputer.
 ________________________________________
-📌 9. Variabel Global
-Variabel global yang digunakan hanya untuk:
-
-•	data [maxData]Penggunaan (array statis)
-
-•	jumlahData int (penghitung jumlah data yang valid)
-
-Sesuai dengan aturan, variabel global dibatasi hanya untuk array dan tipe bentukan.
+✅ cariIndex(nama string) int
+Mencari indeks array berdasarkan nama pengguna. Return -1 jika tidak ditemukan.
 ________________________________________
-✅ Kesimpulan
-Program ini sudah sesuai dengan seluruh ketentuan yang diberikan:
+✅ updateData()
 
-•	Modular
+•	Cari data berdasarkan nama
 
-•	Menggunakan array statis dan struct
+•	Jika ditemukan, minta input nama & komputer baru
 
-•	Memiliki fitur CRUD
+•	Tidak memperbarui waktu atau biaya (bisa ditambahkan nanti)
+________________________________________
+✅ hapusData()
 
-•	Pencarian & pengurutan sesuai algoritma dasar
+•	Cari data berdasarkan nama
 
-•	Ada proses perhitungan biaya
+•	Hapus dengan cara menggeser data setelahnya ke kiri
+________________________________________
+✅ cariData()
 
-•	Tidak melanggar batasan penggunaan variabel global dan struktur kontrol
+•	Mencari dan menampilkan data berdasarkan nama
+________________________________________
+✅ urutkanDataBiaya(naik bool)
+
+•	Mengurutkan data berdasarkan biaya (naik atau turun)
+
+•	Menggunakan algoritma Selection Sort
+________________________________________
+✅ resetData()
+
+•	Menghapus semua data dengan mengatur jumlahData = 0
+________________________________________
+✅ laporanHarian()
+
+•	Menampilkan total pengguna & total pendapatan hari itu
+
+•	Mengakumulasi semua Biaya dari array data
+________________________________________
+✅ rataRataDurasi()
+
+•	Menghitung total durasi semua pengguna
+
+•	Membagi dengan jumlahData untuk mendapatkan rata-rata durasi
+________________________________________
+✅ daftarKomputerAktif()
+
+•	Menampilkan daftar komputer yang digunakan hari ini
+
+•	Menggunakan map[int]bool untuk memastikan unik
+________________________________________
+📝 Contoh Output
+Jika pengguna menambahkan 2 data:
+
+1. Budi | PC #1 | 09:00 - 10:30 (1h30m0s) | Rp22500
+
+2. Siti | PC #2 | 08:15 - 09:15 (1h0m0s) | Rp15000
+
+Laporan harian:
+Total Pengguna: 2
+Total Pendapatan: Rp37500
+________________________________________
+🧠 Catatan Tambahan
+
+•	Durasi dihitung dengan time.Sub, dan dikonversi ke jam untuk hitung biaya.
+
+•	Jika hasil biaya = 0 (durasi < 1 jam), tetap dikenakan minimum 1 jam.
+
+•	Fungsi rataRataDurasi() memakai time.ParseDuration untuk mengubah string ke Duration lagi.

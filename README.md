@@ -52,9 +52,13 @@ const (
     tarifPerJam = 15000
     maxData     = 100
 )
+
 var (
+    
     data       [maxData]Penggunaan
+    
     jumlahData int
+
 )
 
 •	tarifPerJam: Biaya per jam komputer

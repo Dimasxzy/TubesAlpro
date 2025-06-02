@@ -20,12 +20,18 @@ import (
 ________________________________________
 2. Struct Penggunaan
 type Penggunaan struct {
-    Nama     string
-    Komputer int
-    Mulai    string
-    Selesai  string
-    Durasi   string
-    Biaya    int
+
+   Nama     string
+
+   Komputer int
+
+   Mulai    string
+
+   Selesai  string
+
+   Durasi   string
+
+   Biaya    int
 }
 Struktur data untuk menyimpan satu entri penggunaan komputer:
 

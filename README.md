@@ -33,6 +33,7 @@ type Penggunaan struct {
 
    Biaya    int
 }
+
 Struktur data untuk menyimpan satu entri penggunaan komputer:
 
 •	Nama: Nama pengguna
